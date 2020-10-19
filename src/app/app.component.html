@@ -31,11 +31,15 @@
 	</div>
 	<div>
 		first restoreFocus
-		<pre>{{ d.restoreFocus | json}}</pre>
+		<div *ngFor="let item of d | keyvalue">
+			{{ item.key }} - {{ item.value }}
+		</div>
 	</div>
 	<div>
 		second restoreFocus
-		<pre>{{ d2.restoreFocus | json }}</pre>
+		<div *ngFor="let item of d2 | keyvalue">
+			{{ item.key }} - {{ item.value }}
+		</div>
 	</div>
 	<div>
 		first.errors
