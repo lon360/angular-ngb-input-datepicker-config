@@ -1,10 +1,51 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import {
+  NgbDatepickerConfig,
+  NgbDateStruct,
+  NgbInputDatepickerConfig
+} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+  providers: [NgbDatepickerConfig, NgbInputDatepickerConfig]
 })
-export class AppComponent  {
-  name = 'Angular ' + VERSION.major;
+export class AppComponent implements OnInit {
+  constructor(
+    config: NgbDatepickerConfig,
+    inputConfig: NgbInputDatepickerConfig
+  ) {
+    config.minDate = this.minDate;
+    config.maxDate = this.maxDate;
+    config.firstDayOfWeek = 7;
+    inputConfig.restoreFocus = null;
+    inputConfig.minDate = this.minDate;
+    inputConfig.maxDate = this.maxDate;
+  }
+  model1: NgbDateStruct;
+  model2: NgbDateStruct;
+
+  minDate = { year: 2000, month: 1, day: 1 };
+  maxDate = { year: 2099, month: 12, day: 31 };
+  group = new FormGroup({
+    first: new FormControl(null),
+    second: new FormControl(null)
+  });
+  get first(): FormControl {
+    return this.control("first");
+  }
+  get second(): FormControl {
+    return this.control("second");
+  }
+
+  ngOnInit(): void {
+    this.first.setValue({ year: 1900, month: 1, day: 1 });
+    this.second.setValue({ year: 1900, month: 1, day: 1 });
+  }
+
+  private control(name: string): FormControl {
+    return this.group.controls[name] as FormControl;
+  }
 }
