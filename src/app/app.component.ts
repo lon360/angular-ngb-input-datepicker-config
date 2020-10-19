@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import {
   NgbDatepickerConfig,
   NgbDateStruct,
+  NgbInputDatepicker,
   NgbInputDatepickerConfig
 } from "@ng-bootstrap/ng-bootstrap";
 
@@ -12,7 +13,7 @@ import {
   styleUrls: ["./app.component.css"],
   providers: [NgbDatepickerConfig, NgbInputDatepickerConfig]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     config: NgbDatepickerConfig,
     inputConfig: NgbInputDatepickerConfig
@@ -23,6 +24,10 @@ export class AppComponent implements OnInit {
     inputConfig.restoreFocus = null;
     inputConfig.minDate = this.minDate;
     inputConfig.maxDate = this.maxDate;
+  }
+  ngAfterViewInit(): void {
+    console.log(`first restoreFocus: ${this.d.restoreFocus}`);
+    console.log(`second restoreFocus: ${this.d2.restoreFocus}`);
   }
   model1: NgbDateStruct;
   model2: NgbDateStruct;
@@ -39,6 +44,8 @@ export class AppComponent implements OnInit {
   get second(): FormControl {
     return this.control("second");
   }
+  @ViewChild("d", { static: true }) d: NgbInputDatepicker;
+  @ViewChild("d2", { static: true }) d2: NgbInputDatepicker;
 
   ngOnInit(): void {
     this.first.setValue({ year: 1900, month: 1, day: 1 });
@@ -47,9 +54,5 @@ export class AppComponent implements OnInit {
 
   private control(name: string): FormControl {
     return this.group.controls[name] as FormControl;
-  }
-
-  example(obj: any): string {
-    return JSON.stringify(obj);
   }
 }
