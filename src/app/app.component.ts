@@ -48,4 +48,8 @@ export class AppComponent implements OnInit {
   private control(name: string): FormControl {
     return this.group.controls[name] as FormControl;
   }
+
+  example(obj: any): string {
+    return JSON.stringify(obj);
+  }
 }
