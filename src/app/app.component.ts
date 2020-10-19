@@ -21,14 +21,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     config.minDate = this.minDate;
     config.maxDate = this.maxDate;
     config.firstDayOfWeek = 7;
+    // following properties not working
     inputConfig.restoreFocus = null;
     inputConfig.minDate = this.minDate;
     inputConfig.maxDate = this.maxDate;
   }
-  ngAfterViewInit(): void {
-    console.log(`first restoreFocus: ${this.d.restoreFocus}`);
-    console.log(`second restoreFocus: ${this.d2.restoreFocus}`);
-  }
+
   model1: NgbDateStruct;
   model2: NgbDateStruct;
 
@@ -50,6 +48,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.first.setValue({ year: 1900, month: 1, day: 1 });
     this.second.setValue({ year: 1900, month: 1, day: 1 });
+  }
+
+  ngAfterViewInit(): void {
+    console.log(`first restoreFocus: ${this.d.restoreFocus}`);
+    console.log(`second restoreFocus: ${this.d2.restoreFocus}`);
   }
 
   private control(name: string): FormControl {
