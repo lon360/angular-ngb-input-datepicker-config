@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
     inputConfig.restoreFocus = null;
     inputConfig.minDate = this.minDate;
     inputConfig.maxDate = this.maxDate;
+    inputConfig.autoClose = true;
+    inputConfig.container = null;
   }
   model1: NgbDateStruct;
   model2: NgbDateStruct;
