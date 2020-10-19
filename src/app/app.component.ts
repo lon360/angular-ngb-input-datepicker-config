@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     config.minDate = this.minDate;
     config.maxDate = this.maxDate;
     config.firstDayOfWeek = 7;
-    // following properties not working
+    // following properties are not working
     inputConfig.restoreFocus = null;
     inputConfig.minDate = this.minDate;
     inputConfig.maxDate = this.maxDate;
